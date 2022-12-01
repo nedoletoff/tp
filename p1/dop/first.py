@@ -45,7 +45,7 @@ class Ui_MainWindow(object):
         self.errorLabel.setObjectName("errorLabel")
         self.gridLayout.addWidget(self.errorLabel, 13, 0, 1, 2)
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setObjectName("label")
+        self.label.setObjectName("error_label")
         self.gridLayout.addWidget(self.label, 3, 0, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setObjectName("label_2")

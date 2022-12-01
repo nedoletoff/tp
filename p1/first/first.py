@@ -21,7 +21,7 @@ class Ui_MainWindow(object):
         self.result.setObjectName("result")
         self.gridLayout.addWidget(self.result, 6, 0, 1, 2)
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setObjectName("label")
+        self.label.setObjectName("error_label")
         self.gridLayout.addWidget(self.label, 2, 0, 1, 1)
         self.surnameUnicode = QtWidgets.QTextBrowser(self.centralwidget)
         self.surnameUnicode.setObjectName("surnameUnicode")
