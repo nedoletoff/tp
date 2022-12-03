@@ -48,5 +48,6 @@ def decipher(text, key) -> str:
 
 if __name__ == '__main__':
     print(cipher('string with some text_label', 'tskdh'))
-    print(cipher('string with some text_label', 'abcd'))
-    print(decipher(cipher('string with some text_label', 'tskdh'), 'tskdh'))
+    print(decipher('mmcluz hlbb drtx ehfn_vdixe', 'tskdh'))
+    print(cipher('st', 'tskdh'))
+    print(decipher('mm', 'tskdh'))

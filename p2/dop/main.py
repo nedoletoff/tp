@@ -35,7 +35,7 @@ class ExampleApp(QtWidgets.QMainWindow, viginer_v.Ui_MainWindow):
             key = self.key_word_decipher_edit.toPlainText()
             if len(key) == 0:
                 raise Exception("Key word field is empty")
-            res = viginer.cipher(text, key)
+            res = viginer.decipher(text, key)
             self.result_decipher_browser.setText(res)
         except Exception as e:
             self.error_label.setText(str(e))

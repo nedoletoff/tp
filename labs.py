@@ -24,9 +24,12 @@ class Ui_MainWindow(object):
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
+        self.lab3_2_button = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.lab3_2_button.setObjectName("lab3_1_button")
+        self.gridLayout.addWidget(self.lab3_2_button, 2, 3, 1, 1)
         self.lab3_1_button = QtWidgets.QPushButton(self.gridLayoutWidget)
         self.lab3_1_button.setObjectName("lab3_1_button")
-        self.gridLayout.addWidget(self.lab3_1_button, 2, 3, 1, 1)
+        self.gridLayout.addWidget(self.lab3_1_button, 1, 3, 1, 1)
         self.lab2_1_button = QtWidgets.QPushButton(self.gridLayoutWidget)
         self.lab2_1_button.setObjectName("lab2_1_button")
         self.gridLayout.addWidget(self.lab2_1_button, 2, 2, 1, 1)
@@ -71,18 +74,27 @@ class Ui_MainWindow(object):
         self.lab1_dop_button.clicked.connect(self.start_lab_1_dop)
         self.lab2_1_button.clicked.connect(self.start_lab_2_1)
         self.lab2_dop_button.clicked.connect(self.start_lab_2_dop)
+        self.lab3_1_button.clicked.connect(self.start_lab_3_1)
+        self.lab3_2_button.clicked.connect(self.start_lab_3_2)
+        self.lab3_dop_button.clicked.connect(self.start_lab_3_dop)
+
 
     def start_lab_1_1(self):
         subprocess.run(['python3', 'p1/first/main.py'])
     def start_lab_1_2(self):
-        subprocess.run(['python3', 'p1/first/main.py'])
+        subprocess.run(['python3', 'p1/second/main.py'])
     def start_lab_1_dop(self):
         subprocess.run(['python3', 'p1/dop/main.py'])
     def start_lab_2_1(self):
         subprocess.run(['python3', 'p2/first/main.py'])
     def start_lab_2_dop(self):
         subprocess.run(['python3', 'p2/dop/main.py'])
-
+    def start_lab_3_1(self):
+        subprocess.run(['python3', 'p3/first/main.py'])
+    def start_lab_3_2(self):
+        subprocess.run(['python3', 'p3/second/main.py'])
+    def start_lab_3_dop(self):
+        subprocess.run(['python3', 'p3/dop/main.py'])
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -93,6 +105,7 @@ class Ui_MainWindow(object):
         self.lab3_dop_button.setText(_translate("MainWindow", "Lab3.dop"))
         self.lab2_dop_button.setText(_translate("MainWindow", "Lab2.dop"))
         self.lab1_dop_button.setText(_translate("MainWindow", "Lab.1.dop"))
+        self.lab3_2_button.setText(_translate("MainWindow", "Lab3.2"))
         self.labs1_label.setText(_translate("MainWindow", "Labs 1"))
         self.labs2_label.setText(_translate("MainWindow", "Labs 2"))
         self.labs3_label.setText(_translate("MainWindow", "Labs 3"))
