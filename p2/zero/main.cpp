@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-extern func.a
+extern char _cipher(char, char);
+extern char _next_key(char);
 
 int main() {
     char seed;
@@ -33,8 +34,8 @@ flag1: std::cout << "Enter key: ";
 
     std::cout << "Encrypted text: ";
     for (int i = 0; i < str.length(); i++) {
-        crypt_str[i] = cipher(str[i], seed);
-        seed = next_key(seed);
+        crypt_str[i] = _cipher(str[i], seed);
+        seed = _next_key(seed);
     }
     std::cout << crypt_str << std::endl;
 
@@ -52,8 +53,8 @@ flag2: std::cout << "Enter key: ";
 
     std::cout << "Decrypted text: ";
     for (int i = 0; i < str.length(); i++) {
-        str[i] = cipher(crypt_str[i], seed);
-        seed = next_key(seed);
+        str[i] = _cipher(crypt_str[i], seed);
+        seed = _next_key(seed);
     }
     std::cout << str << std::endl;
 

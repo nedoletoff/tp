@@ -4,8 +4,8 @@ def sum_chars(text_chr: str, key_chr: str) -> str:
     if text_chr.isalpha():
         text_chr = text_chr.lower()
         key_chr = key_chr.lower()
-        temp = ord(key_chr) - ord('a')
-        if temp + ord(text_chr) > ord('z'):
+        temp = ord(key_chr) - ord('a') + 1
+        if temp + ord(text_chr) > ord('z') + 1:
             temp = ord(key_chr) - ord('z')
         return chr(temp + ord(text_chr))
 
@@ -19,7 +19,7 @@ def sub_chars(text_chr: str, key_chr: str) -> str:
     if text_chr.isalpha():
         text_chr = text_chr.lower()
         key_chr = key_chr.lower()
-        temp = ord(key_chr) - ord('a')
+        temp = ord(key_chr) - ord('a') + 1
         if - temp + ord(text_chr) < ord('a'):
             temp = ord(key_chr) - ord('z')
         return chr(-temp + ord(text_chr))
@@ -49,5 +49,6 @@ def decipher(text, key) -> str:
 if __name__ == '__main__':
     print(cipher('string with some text_label', 'tskdh'))
     print(decipher('mmcluz hlbb drtx ehfn_vdixe', 'tskdh'))
-    print(cipher('st', 'tskdh'))
-    print(decipher('mm', 'tskdh'))
+    print(cipher('qwertyuiopasdfghjklzxcvbnm', 'tskdh'))
+    print(decipher('kppvbsntsxulojobcvphrvgfvg', 'tskdh'))
+
