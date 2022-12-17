@@ -1,7 +1,17 @@
+import logging
+
 from PyQt6 import QtWidgets
 import sys
 import viginer_v
 import viginer
+
+logging.basicConfig(
+    filename="/home/nedoletoff/Documents/tp/sample.log",
+    format='%(asctime)s %(levelname)s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+log = logging.getLogger("ex")
 
 
 class ExampleApp(QtWidgets.QMainWindow, viginer_v.Ui_MainWindow):
@@ -23,6 +33,7 @@ class ExampleApp(QtWidgets.QMainWindow, viginer_v.Ui_MainWindow):
             res = viginer.cipher(text, key)
             self.result_cipher_browser.setText(res)
         except Exception as e:
+            log.exception(e)
             self.error_label.setText(str(e))
         else:
             self.error_label.setText("")
@@ -38,6 +49,7 @@ class ExampleApp(QtWidgets.QMainWindow, viginer_v.Ui_MainWindow):
             res = viginer.decipher(text, key)
             self.result_decipher_browser.setText(res)
         except Exception as e:
+            log.exception(e)
             self.error_label.setText(str(e))
         else:
             self.error_label.setText("")

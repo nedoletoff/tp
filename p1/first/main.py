@@ -1,3 +1,5 @@
+import logging
+
 from PyQt6 import QtWidgets
 import sys
 from MyException import *
@@ -5,6 +7,13 @@ from MyException import *
 import first  # Это конвертированный файл дизайна
 
 
+logging.basicConfig(
+    filename="/home/nedoletoff/Documents/tp/sample.log",
+    format='%(asctime)s %(levelname)s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+log = logging.getLogger("ex")
 class ExampleApp(QtWidgets.QMainWindow, first.Ui_MainWindow):
     def __init__(self):
 
@@ -13,35 +22,35 @@ class ExampleApp(QtWidgets.QMainWindow, first.Ui_MainWindow):
         self.changeButton.clicked.connect(self.change)
 
     def check_name(self):
-        if self.nameEditor.text_label().isdigit():
+        if self.nameEditor.text().isdigit():
             raise MyException("Name contains number")
-        if len(self.nameEditor.text_label()) == 0:
+        if len(self.nameEditor.text()) == 0:
             raise MyException("Name is empty")
-        if not self.nameEditor.text_label().isalpha():
+        if not self.nameEditor.text().isalpha():
             raise MyException("Name contains not supported symbols")
 
     def check_surname(self):
-        if self.surnameEditor.text_label().isdigit():
+        if self.surnameEditor.text().isdigit():
             raise MyException("Surname contains number")
-        if len(self.surnameEditor.text_label()) == 0:
+        if len(self.surnameEditor.text()) == 0:
             raise MyException("Surname is empty")
-        if not self.surnameEditor.text_label().isalpha():
+        if not self.surnameEditor.text().isalpha():
             raise MyException("Surname contains not supported symbols")
 
     def writeUnicode(self):
-        min_len = min(len(self.nameEditor.text_label()), len(self.surnameEditor.text_label()))
-        max_len = max(len(self.nameEditor.text_label()), len(self.surnameEditor.text_label()))
+        min_len = min(len(self.nameEditor.text()), len(self.surnameEditor.text()))
+        max_len = max(len(self.nameEditor.text()), len(self.surnameEditor.text()))
         rest_len = max_len - min_len
-        unicode_name = self.nameEditor.text_label()[:min_len]
+        unicode_name = self.nameEditor.text()[:min_len]
         unicode_name = unicode_name.encode("utf-8")
-        unicode_surname = self.surnameEditor.text_label()[:min_len]
+        unicode_surname = self.surnameEditor.text()[:min_len]
         unicode_surname = unicode_surname.encode("utf-8")
         if rest_len == 0:
             rest = ""
-        elif max_len == len(self.nameEditor.text_label()):
-            rest = self.nameEditor.text_label()[-rest_len:]
+        elif max_len == len(self.nameEditor.text()):
+            rest = self.nameEditor.text()[-rest_len:]
         else:
-            rest = self.surnameEditor.text_label()[-rest_len:]
+            rest = self.surnameEditor.text()[-rest_len:]
 
         res = bytearray()
         un = ""
@@ -71,6 +80,7 @@ class ExampleApp(QtWidgets.QMainWindow, first.Ui_MainWindow):
             self.errorLabel.setText("")
             self.writeUnicode()
         except MyException as e:
+            log.exception(e)
             self.errorLabel.setText(e.message)
 
 

@@ -1,8 +1,16 @@
 from PyQt6 import QtWidgets
 import sys
-from MyException import *
+import logging
 
 import first  # Это конвертированный файл дизайна
+
+logging.basicConfig(
+    filename="/home/nedoletoff/Documents/tp/sample.log",
+    format='%(asctime)s %(levelname)s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+log = logging.getLogger("ex")
 
 
 class ExampleApp(QtWidgets.QMainWindow, first.Ui_MainWindow):
@@ -13,46 +21,48 @@ class ExampleApp(QtWidgets.QMainWindow, first.Ui_MainWindow):
         self.changeButton.clicked.connect(self.change)
 
     def check_name(self):
-        if self.nameEditor.text_label().isdigit():
-            raise MyException("Name contains number")
-        if len(self.nameEditor.text_label()) == 0:
-            raise MyException("Name is empty")
-        if not self.nameEditor.text_label().isalpha():
-            raise MyException("Name contains not supported symbols")
+        if self.nameEditor.text().isdigit():
+            raise Exception("Name contains number")
+        if len(self.nameEditor.text()) == 0:
+            raise Exception("Name is empty")
+        if not self.nameEditor.text().isalpha():
+            raise Exception("Name contains not supported symbols")
 
     def check_surname(self):
-        if self.surnameEditor.text_label().isdigit():
-            raise MyException("Surname contains number")
-        if len(self.surnameEditor.text_label()) == 0:
-            raise MyException("Surname is empty")
-        if not self.surnameEditor.text_label().isalpha():
-            raise MyException("Surname contains not supported symbols")
+        if self.surnameEditor.text().isdigit():
+            raise Exception("Surname contains number")
+        if len(self.surnameEditor.text()) == 0:
+            raise Exception("Surname is empty")
+        if not self.surnameEditor.text().isalpha():
+            raise Exception("Surname contains not supported symbols")
 
     def check_second_name(self):
-        if self.secondNameEditor.text_label().isdigit():
-            raise MyException("Second name contains number")
-        if len(self.secondNameEditor.text_label()) == 0:
-            raise MyException("Second name is empty")
-        if not self.secondNameEditor.text_label().isalpha():
-            raise MyException("Second name contains not supported symbols")
+        if self.secondNameEditor.text().isdigit():
+            raise Exception("Second name contains number")
+        if len(self.secondNameEditor.text()) == 0:
+            raise Exception("Second name is empty")
+        if not self.secondNameEditor.text().isalpha():
+            raise Exception("Second name contains not supported symbols")
 
     def writeUnicode(self):
-        min_len = min(len(self.nameEditor.text_label()), len(self.surnameEditor.text_label()), len(self.secondNameEditor.text_label()))
-        max_len = max(len(self.nameEditor.text_label()), len(self.surnameEditor.text_label()), len(self.secondNameEditor.text_label()))
+        min_len = min(len(self.nameEditor.text()), len(self.surnameEditor.text()),
+                      len(self.secondNameEditor.text()))
+        max_len = max(len(self.nameEditor.text()), len(self.surnameEditor.text()),
+                      len(self.secondNameEditor.text()))
         rest_len = max_len - min_len
-        unicode_name = self.nameEditor.text_label()[:min_len]
+        unicode_name = self.nameEditor.text()[:min_len]
         unicode_name = unicode_name.encode("utf-8")
-        unicode_surname = self.surnameEditor.text_label()[:min_len]
+        unicode_surname = self.surnameEditor.text()[:min_len]
         unicode_surname = unicode_surname.encode("utf-8")
-        unicode_second_name = self.secondNameEditor.text_label()[:min_len]
+        unicode_second_name = self.secondNameEditor.text()[:min_len]
         unicode_second_name = unicode_second_name.encode("utf-8")
 
-        if max_len == len(self.nameEditor.text_label()):
-            rest = self.nameEditor.text_label()[-rest_len:]
-        elif max_len == len(self.surnameEditor.text_label()):
-            rest = self.surnameEditor.text_label()[-rest_len:]
-        elif max_len == len(self.secondNameEditor.text_label()):
-            rest = self.secondNameEditor.text_label()[-rest_len:]
+        if max_len == len(self.nameEditor.text()):
+            rest = self.nameEditor.text()[-rest_len:]
+        elif max_len == len(self.surnameEditor.text()):
+            rest = self.surnameEditor.text()[-rest_len:]
+        elif max_len == len(self.secondNameEditor.text()):
+            rest = self.secondNameEditor.text()[-rest_len:]
 
         res = bytearray()
         un = ""
@@ -91,8 +101,9 @@ class ExampleApp(QtWidgets.QMainWindow, first.Ui_MainWindow):
             self.check_second_name()
             self.errorLabel.setText("")
             self.writeUnicode()
-        except MyException as e:
-            self.errorLabel.setText(e.message)
+        except Exception as e:
+            log.exception(e)
+            self.errorLabel.setText(str(e))
 
 
 def main():

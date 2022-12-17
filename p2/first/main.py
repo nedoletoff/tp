@@ -1,3 +1,4 @@
+import logging
 import sys
 
 from PyQt6 import QtWidgets
@@ -6,6 +7,14 @@ import random
 from datetime import datetime
 
 import design2
+
+logging.basicConfig(
+    filename="/home/nedoletoff/Documents/tp/sample.log",
+    format='%(asctime)s %(levelname)s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+log = logging.getLogger("ex")
 
 
 class ExampleApp(QtWidgets.QMainWindow, design2.Ui_MainWindow):
@@ -25,12 +34,12 @@ class ExampleApp(QtWidgets.QMainWindow, design2.Ui_MainWindow):
             self.run_with_thread()
             self.time_with_threads_label.setText("Время с потоками: " + str(datetime.now() - t1))
         except Exception as e:
+            log.exception(e)
             t2 = datetime.now()
             self.error_label.setText("Ошибка ввода в таблицу - " + str(t2) + "\n" + str(e))
             self.clear()
         else:
             self.error_label.setText("")
-
 
     def run_with_thread(self):
         t = [threading.Thread(target=self.double_sum_label.setText, args=[str(self.get_double_sum())]),
@@ -84,7 +93,7 @@ class ExampleApp(QtWidgets.QMainWindow, design2.Ui_MainWindow):
         self.double_sum_label.setText("")
         self.index_label.setText("")
         self.time_no_threads_label.setText("Время работы без потоков: ")
-        self.time_with_threads_label.setText("Время с потоками" )
+        self.time_with_threads_label.setText("Время с потоками")
 
     def enter_random(self):
         if self.comboBox.currentText() == "случайно":

@@ -80,7 +80,7 @@ def main():
     print("RSA")
 
     p = int(input(" - Enter a prime number: "))
-    q = int(input(" - Enter another prime number: "))
+    q = int(input(" - Enter another.py prime number: "))
 
     print(" - Generating your public / private key-pairs now . . .")
 
